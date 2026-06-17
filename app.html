@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Vibe Finder</title>
+    <style>
+        /* --- Clean Modern Styling for the App --- */
+        body {
+            background-color: #0b0f19;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .app-card {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 { color: #10b981; margin-top: 0; }
+        p { color: #9ca3af; }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            background-color: #10b981;
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            margin-top: 10px;
+        }
+
+        button:hover { background-color: #059669; }
+
+        /* --- Dynamic Result Window --- */
+        #result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #1e293b;
+            border-left: 5px solid #10b981;
+            display: none;
+            text-align: left;
+        }
+
+        #result h3 { margin-top: 0; color: #ffffff; }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: #38bdf8;
+            text-decoration: none;
+        }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <div class="app-card">
+        <h1>🎵 Track Vibe Finder</h1>
+        <p>Answer two quick questions to discover which of my top artists or albums matches your current energy perfectly.</p>
+
+        <div class="form-group">
+            <label for="mood">What is your current mood?</label>
+            <select id="mood">
+                <option value="chill">Relaxed / Chilling out</option>
+                <option value="thoughtful">Thoughtful / Deep in feelings</option>
+                <option value="hyped">Hyped Up / Ready to move</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="activity">What are you doing right now?</label>
+            <select id="activity">
+                <option value="driving">Driving somewhere scenic</option>
+                <option value="studying">Studying or relaxing at home</option>
+                <option value="hanging">Hanging out with friends</option>
+            </select>
+        </div>
+
+        <button onclick="findMyVibe()">Generate My Recommendation</button>
+
+        <div id="result">
+            <h3 id="result-title">Your Custom Match:</h3>
+            <p id="result-text"></p>
+        </div>
+
+        <br>
+        <a href="scratch.html" class="back-link">← Return to Music Page</a>
+    </div>
+
+    <script>
+        function findMyVibe() {
+            // Grab values chosen by the user
+            const mood = document.getElementById('mood').value;
+            const activity = document.getElementById('activity').value;
+            
+            const resultBox = document.getElementById('result');
+            const resultText = document.getElementById('result-text');
+
+            let recommendation = "";
+
+            // Custom algorithm mapping choices straight to your real data sheets!
+            if (mood === "thoughtful" || activity === "driving") {
+                recommendation = "<strong>Zach Bryan — 'With Heaven On Top'</strong><br><br>Perfect for staring out the window on a long drive. Zach's raw storytelling matches a reflective, introspective mood beautifully.";
+            } else if (mood === "chill" && activity === "studying") {
+                recommendation = "<strong>LANY — 'Soft'</strong><br><br>The ultimate atmospheric background vibe. It keeps your concentration sharp while keeping the room feeling incredibly relaxing.";
+            } else if (mood === "hyped" || activity === "hanging") {
+                recommendation = "<strong>The Backseat Lovers or The Band CAMINO</strong><br><br>High energy rhythms, crisp guitar tracks, and huge anthems perfect for listening to live or turning up loud with your friends.";
+            } else {
+                recommendation = "<strong>Noah Kahan — 'The Great Divide' or Lizzy McAlpine</strong><br><br>Rich acoustic textures and vocal harmonies that fit a cozy evening perfectly.";
+            }
+
+            // Reveal the results box dynamically
+            resultText.innerHTML = recommendation;
+            resultBox.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
